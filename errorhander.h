@@ -42,7 +42,7 @@ public:
     enum ErrorLevel {
         Info,       // 仅信息
         Warning,    // 警告
-        Critifcal,  // 严重
+        Critical,  // 严重
         Fatal,      // 致命
     };
 
@@ -56,7 +56,7 @@ public:
     void logError(const QString& context, const QString& error, ErrorLevel level=Warning);
 
     // 功能：设置/切换日志文件路径（追加），后续按日期/大小自动流动
-    void setLogLogFile(const QString& filename);
+    void setLogFile(const QString& filename);
 
     // 功能：开启/关闭日志落盘
     void setLosggingEnabled(bool enabled);
@@ -65,7 +65,7 @@ public:
     static QString errorTypeToString(ErrorType type);
 
     // 功能：错误级别枚举转换字符串
-    static QString errorLevelToString(ErrorType type);
+    static QString errorLevelToString(ErrorLevel level);
 
 private:
     ErrorHandler(const ErrorHandler&)=delete;
@@ -75,6 +75,8 @@ private:
     QTextStream* logStream; // 配套文本流，负责写入编码与刷新
     QMutex logMutex;        // 包含logFile/logStream的互斥锁
     bool loggingEnabled;    // 总开关
+    // 功能：当前日志文件路径
+    QString currentLogPath;
 
     // 功能：初始化，切换当前日志，创建目录与文件
     void initializeLogFile();
@@ -85,10 +87,7 @@ private:
     // 功能：按大小滚动日志文件
     void rolloverIfNeeded_unlocked(qint64 maxBytes=5*1024*1024);
 
-    // 功能：当前日志文件路径
-    QString currentLogPath;
-
-    // 功能：按日志切换日志（需要先持锁）
+    // 功能：按日期切换日志（需要先持锁）
     void reopenForToday_unlocked();
 
 signals:
@@ -104,7 +103,7 @@ signals:
 #define LOG_INFO(context, message)  \
 ErrorHandler::instance().logError(context, message, ErrorHandler::Info) // 记录信息
 
-#define LOG_ERROR(type, level, message, parent)  \
+#define LOG_ERROR_(type, level, message, parent)  \
 ErrorHandler::instance().logError(context, message, ErrorHandler::Info) // 记录信息
 
 
