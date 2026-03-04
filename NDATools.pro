@@ -1,5 +1,8 @@
 QT       += core gui
 
+# 网络模块：提供TCP/UDO套接字功能
+QT += network
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17

@@ -12,3 +12,9 @@ FormTcpClient::~FormTcpClient()
 {
     delete ui;
 }
+
+void FormTcpClient::on_pushButton_TCPClientConnect_clicked()
+{
+
+}
+

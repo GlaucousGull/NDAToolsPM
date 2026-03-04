@@ -15,6 +15,9 @@ public:
     explicit FormTcpClient(QWidget *parent = nullptr);
     ~FormTcpClient();
 
+private slots:
+    void on_pushButton_TCPClientConnect_clicked();
+
 private:
     Ui::FormTcpClient *ui;
 };

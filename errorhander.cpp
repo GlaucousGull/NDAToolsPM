@@ -49,7 +49,7 @@ void ErrorHandler::handleError(ErrorType type, ErrorLevel level, const QString& 
         XX(Critical, "错误",     QMessageBox::Critical);
         XX(Fatal,    "严重错误", QMessageBox::Critical);
 
-#undef XX // 修正：宏结束必须指定undef的宏名（XX）
+#undef XX
 
     default:
         icon = QMessageBox::NoIcon; // 给默认值，避免未初始化
@@ -223,6 +223,29 @@ void ErrorHandler::reopenForToday_unlocked()
     setLogFile(newPath); // 打开新文件
 }
 
+// 功能：开启/关闭日志落盘
+void ErrorHandler::setLosggingEnabled(bool enabled)
+{
+    loggingEnabled = enabled;
+}
+
+// 功能：初始化，切换当前日志，创建目录与文件
+void ErrorHandler::initializeLogFile()
+{
+    // 日志目录：平台
+    QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir().mkpath(appDataPath);
+
+    // 日志文件名：按日期分片，比如:NDATools_20260101.log
+    QString logFileName = QStringLiteral("%1/NADTools_%2.log").arg(appDataPath, QDate::currentDate().toString("yyyyMMdd"));
+
+    setLogFile(logFileName);    // 打开/切换日志文件
+
+    // 写入启动标记，便于分割进程启动
+    if(logStream) {
+        writeToLog("===NDATools 启动 ===");
+    }
+}
 
 
 
