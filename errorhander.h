@@ -19,7 +19,7 @@
 #pragma execution_character_set("utf-8")    // MSVC下确保源文件按 UTF-8解析
 #endif
 
-class ErrorHandler : public QObject
+class ErrorHandler   : public QObject
 {
     Q_OBJECT
 public:
@@ -103,9 +103,8 @@ signals:
 #define LOG_INFO(context, message)  \
 ErrorHandler::instance().logError(context, message, ErrorHandler::Info) // 记录信息
 
-#define LOG_ERROR_(type, level, message, parent)  \
-ErrorHandler::instance().logError(context, message, ErrorHandler::Info) // 记录信息
-
+#define HANDLE_ERROR(type, level, message, parent)  \
+ErrorHandler::instance().handleError(type, level, message, parent) // 弹窗并记录，统一入口
 
 
 

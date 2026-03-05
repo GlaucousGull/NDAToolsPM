@@ -24,6 +24,9 @@
 #include <QColor>       // 日志颜色
 #include <QCloseEvent>  // 窗口关闭事件
 
+#include <QSettings>     // 持久化最近使用的 IP/端口
+#include "errorhander.h" // 统一错误处理
+
 namespace Ui {
 class FormTcpServer;
 }

@@ -27,7 +27,7 @@ class Ui_FormTcpServer
 {
 public:
     QGroupBox *groupBox_2;
-    QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *plainTextEdit_TCPServerSendData;
     QLabel *label_5;
     QPushButton *pushButton_TCPServerClose;
     QPushButton *pushButton_TCPServerSendMsg;
@@ -48,9 +48,9 @@ public:
         groupBox_2 = new QGroupBox(FormTcpServer);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setGeometry(QRect(690, 0, 201, 551));
-        plainTextEdit = new QPlainTextEdit(groupBox_2);
-        plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(10, 380, 181, 91));
+        plainTextEdit_TCPServerSendData = new QPlainTextEdit(groupBox_2);
+        plainTextEdit_TCPServerSendData->setObjectName("plainTextEdit_TCPServerSendData");
+        plainTextEdit_TCPServerSendData->setGeometry(QRect(10, 380, 181, 91));
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(10, 350, 151, 31));
