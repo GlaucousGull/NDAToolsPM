@@ -3,6 +3,7 @@ release/formtcpclient.o
 release/formtcpserver.o
 release/formudpclient.o
 release/formudpserver.o
+release/inputvalidator.o
 release/main.o
 release/mainwidget.o
 release/qrc_images.o

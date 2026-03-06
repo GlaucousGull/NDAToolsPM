@@ -17,6 +17,7 @@ SOURCES += \
     formtcpserver.cpp \
     formudpclient.cpp \
     formudpserver.cpp \
+    inputvalidator.cpp \
     main.cpp \
     mainwidget.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     formtcpserver.h \
     formudpclient.h \
     formudpserver.h \
+    inputvalidator.h \
     mainwidget.h
 
 FORMS += \
