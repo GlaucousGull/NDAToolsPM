@@ -7,6 +7,7 @@
 *****************************************************************************/
 
 #include "../../../formtcpclient.h"
+#include <QtGui/qtextcursor.h>
 #include <QtCore/qmetatype.h>
 
 #include <QtCore/qtmochelpers.h>
@@ -40,12 +41,24 @@ template <> constexpr inline auto FormTcpClient::qt_create_metaobjectdata<qt_met
     QtMocHelpers::StringRefStorage qt_stringData {
         "FormTcpClient",
         "on_pushButton_TCPClientConnect_clicked",
-        ""
+        "",
+        "on_pushButton_TCPClientDisconnect_clicked",
+        "on_pushButton_TCPClientClose_clicked",
+        "on_checkBox_TCPClientAtuoTesting_checkStateChanged",
+        "on_pushButton_TCPClientSendMsg_clicked"
     };
 
     QtMocHelpers::UintData qt_methods {
         // Slot 'on_pushButton_TCPClientConnect_clicked'
         QtMocHelpers::SlotData<void()>(1, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_TCPClientDisconnect_clicked'
+        QtMocHelpers::SlotData<void()>(3, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_TCPClientClose_clicked'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_checkBox_TCPClientAtuoTesting_checkStateChanged'
+        QtMocHelpers::SlotData<void()>(5, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'on_pushButton_TCPClientSendMsg_clicked'
+        QtMocHelpers::SlotData<void()>(6, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -70,6 +83,10 @@ void FormTcpClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: _t->on_pushButton_TCPClientConnect_clicked(); break;
+        case 1: _t->on_pushButton_TCPClientDisconnect_clicked(); break;
+        case 2: _t->on_pushButton_TCPClientClose_clicked(); break;
+        case 3: _t->on_checkBox_TCPClientAtuoTesting_checkStateChanged(); break;
+        case 4: _t->on_pushButton_TCPClientSendMsg_clicked(); break;
         default: ;
         }
     }
@@ -95,14 +112,14 @@ int FormTcpClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }

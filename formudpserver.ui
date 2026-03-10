@@ -25,7 +25,7 @@
    <property name="title">
     <string>网络参数设置：</string>
    </property>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="plainTextEdit_udpServerSendData">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -52,7 +52,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>300</y>
+      <y>230</y>
       <width>181</width>
       <height>41</height>
      </rect>
@@ -80,23 +80,6 @@
     <property name="icon">
      <iconset resource="images.qrc">
       <normaloff>:/new/prefix1/images/sendmsg.ico</normaloff>:/new/prefix1/images/sendmsg.ico</iconset>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_UDPServerStop">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>关闭监听</string>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/images/stop.ico</normaloff>:/new/prefix1/images/stop.ico</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_UDPServerStart">

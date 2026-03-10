@@ -1,5 +1,5 @@
-#ifndef ERRORHANDER_H
-#define ERRORHANDER_H
+#ifndef ERRORHANDLER_H
+#define ERRORHANDLER_H
 
 #include <QObject> // QObject基类，支持信号槽与Qt对象生命周期
 
@@ -133,4 +133,4 @@ ErrorHandler::instance().handleError(type, level, message, parent) // 弹窗并�
 
 
 
-#endif // ERRORHANDER_H
+#endif // ERRORHANDLER_H

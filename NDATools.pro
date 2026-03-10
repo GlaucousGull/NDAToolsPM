@@ -12,23 +12,25 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    errorhander.cpp \
+    errorhandler.cpp \
     formtcpclient.cpp \
     formtcpserver.cpp \
     formudpclient.cpp \
     formudpserver.cpp \
     inputvalidator.cpp \
     main.cpp \
-    mainwidget.cpp
+    mainwidget.cpp \
+    network.cpp
 
 HEADERS += \
-    errorhander.h \
+    errorhandler.h \
     formtcpclient.h \
     formtcpserver.h \
     formudpclient.h \
     formudpserver.h \
     inputvalidator.h \
-    mainwidget.h
+    mainwidget.h \
+    network.h
 
 FORMS += \
     formtcpclient.ui \

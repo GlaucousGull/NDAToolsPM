@@ -27,7 +27,7 @@ class Ui_FormTcpClient
 {
 public:
     QGroupBox *groupBox_2;
-    QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *plainTextEdit_TCPClientSendData;
     QLabel *label_5;
     QPushButton *pushButton_TCPClientClose;
     QPushButton *pushButton_TCPClientSendMsg;
@@ -49,9 +49,9 @@ public:
         groupBox_2 = new QGroupBox(FormTcpClient);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setGeometry(QRect(690, 0, 201, 551));
-        plainTextEdit = new QPlainTextEdit(groupBox_2);
-        plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(10, 380, 181, 91));
+        plainTextEdit_TCPClientSendData = new QPlainTextEdit(groupBox_2);
+        plainTextEdit_TCPClientSendData->setObjectName("plainTextEdit_TCPClientSendData");
+        plainTextEdit_TCPClientSendData->setGeometry(QRect(10, 380, 181, 91));
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(10, 350, 151, 31));

@@ -17,6 +17,9 @@ public:
     MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
 
+    // 窗口关闭事件，保存所有子窗口的日志
+    void closeEvent(QCloseEvent* event);
+
 private:
     Ui::MainWidget *ui;
 };

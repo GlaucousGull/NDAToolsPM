@@ -25,7 +25,7 @@
    <property name="title">
     <string>网络参数设置：</string>
    </property>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="QPlainTextEdit" name="plainTextEdit_TCPClientSendData">
     <property name="geometry">
      <rect>
       <x>10</x>

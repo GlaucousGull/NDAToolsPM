@@ -1,4 +1,4 @@
-#include "errorhander.h"
+#include "errorhandler.h"
 
 #include <QStandardPaths>   // 获取平台通用的可写目录
 #include <QDir>             // 目录操作（创建路径等）

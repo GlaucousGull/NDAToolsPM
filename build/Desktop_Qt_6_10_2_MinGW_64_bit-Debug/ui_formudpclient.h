@@ -29,7 +29,7 @@ public:
     QGroupBox *groupBox;
     QPlainTextEdit *plainTextEdit_UDPClientMsg;
     QGroupBox *groupBox_2;
-    QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *plainTextEdit_UDPServerSendData;
     QLabel *label_5;
     QPushButton *pushButton_UDPClientClose;
     QPushButton *pushButton_UDPClientSendMsg;
@@ -55,9 +55,9 @@ public:
         groupBox_2 = new QGroupBox(FormUdpClient);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setGeometry(QRect(690, 0, 201, 551));
-        plainTextEdit = new QPlainTextEdit(groupBox_2);
-        plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(10, 380, 181, 91));
+        plainTextEdit_UDPServerSendData = new QPlainTextEdit(groupBox_2);
+        plainTextEdit_UDPServerSendData->setObjectName("plainTextEdit_UDPServerSendData");
+        plainTextEdit_UDPServerSendData->setGeometry(QRect(10, 380, 181, 91));
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(10, 350, 151, 31));

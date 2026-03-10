@@ -1,6 +1,6 @@
 #include "formtcpserver.h"
 #include "ui_formtcpserver.h"
-
+#include "errorhandler.h" // 统一错误处理
 
 // 功能：构造函数：初始化 UI、服务器实例、样式与信号
 // 说明：恢复上次 IP/端口，填充本机 IPv4，下拉框与按钮初始状态，应用统一 QSS
@@ -31,8 +31,8 @@ FormTcpServer::FormTcpServer(QWidget *parent)
     {
         // setting 是qt提供的持久化存储工具，
         QSettings settings;  // 使用默认组名/应用名保存配置
-        const QString lastIp = settings.value("TCPServer/lastIp").toString();   // 上次IP
-        const int lastPort = settings.value("TCPServer/lastPort", 12345).toInt(); // 上次端口（默认12345）
+        const QString lastIp = settings.value("TCPServer/LastIp").toString();   // 上次IP
+        const int lastPort = settings.value("TCPSever/lastPort", 12345).toInt(); // 上次端口（默认12345）
 
         if(!lastIp.isEmpty()) {
             int index = ui->comboBox_TCPServerIP->findText(lastIp);
@@ -182,7 +182,7 @@ FormTcpServer::FormTcpServer(QWidget *parent)
         "   border-radius: 4px;"
         "   padding: 6px;"
         "}"
-        );
+    );
 }
 
 
@@ -232,7 +232,7 @@ FormTcpServer::~FormTcpServer()
 
 
 // 功能：服务器主动群发输入框中的信息
-//  说明：检验服务运行、文本非空且存储客户端，再将 UTF-8 字节广播给所有连接
+// 说明：检验服务运行、文本非空且存储客户端，再将 UTF-8 字节广播给所有连接
 void FormTcpServer::on_pushButton_TCPServerSendMsg_clicked()
 {
     if(!ui->plainTextEdit_TCPServerSendData) { // 未找到输入框
@@ -256,7 +256,7 @@ void FormTcpServer::on_pushButton_TCPServerSendMsg_clicked()
     }
 
     QByteArray data = message.toUtf8(); // 文本转 UTF-8
-    for(QTcpSocket *client : qAsConst(tcpServerSocketList)) { // 群发消息
+    for(QTcpSocket* client : std::as_const(tcpServerSocketList)) { // 群发消息
         if(client && client->state() == QAbstractSocket::ConnectedState) {
             client->write(data);
         }
@@ -277,10 +277,12 @@ void FormTcpServer::on_pushButton_TCPServerStop_clicked()
     }
 
     tcpServer->close(); // 停止监听
-    for(auto client : tcpServerSocketList) {
-        if(client) { // 判空
-            client->disconnect(); // 断开信号槽
-            client->close();    // 关闭连接
+    for(int i = 0; i < tcpServerSocketList.size(); i++) {
+        QTcpSocket* client = tcpServerSocketList.at(i);
+        if(client) {
+            client->disconnect();   // 断开信号槽
+            client->close();         // 关闭socket
+            client->deleteLater();  // 释放socket
         }
     }
 
@@ -422,7 +424,7 @@ void FormTcpServer::TcpServerConnectedFunc()
     if(!tcpServerSocketList.contains(tcpServerSocket)) {     // 若列表未包含
         tcpServerSocketList.append(tcpServerSocket);    //记录到列表，避免重复
     }
-    connect(tcpServerSocket, &QTcpSocket::readyRead, this, &FormTcpServer::ClientDisconnectedFunc);  // 数据可读
+    connect(tcpServerSocket, &QTcpSocket::readyRead, this, &FormTcpServer::ReadAllDataFunc);     // 数据可读
     connect(tcpServerSocket, &QTcpSocket::disconnected, this, &FormTcpServer::ClientDisconnectedFunc);  // 数据可读
 
     QString strPort = QString::number(tcpServerSocket->peerPort());
@@ -430,9 +432,9 @@ void FormTcpServer::TcpServerConnectedFunc()
     appendColorLog("\n[Prompt:New client connection.]\n", QColor(0x666666)); // 记录连接日志
 
     receivedMessageCount = 0;   // 重置计数
-
-
 }
+
+
 // 功能：处理新客户端断开，清理列表与 UI 状态
 void FormTcpServer::ClientDisconnectedFunc()
 {
@@ -446,7 +448,7 @@ void FormTcpServer::ClientDisconnectedFunc()
     appendColorLog(msg, QColor(0x666666));
 }
 
-// 功能读取所有可用数据并计数、展示日志
+// 功能：读取所有可用数据并计数、展示日志
 void FormTcpServer::ReadAllDataFunc()
 {
     if(QTcpSocket* client = qobject_cast<QTcpSocket*>(sender())) { // 获取触发的客户端
@@ -462,7 +464,11 @@ void FormTcpServer::ReadAllDataFunc()
     }
 }
 
+// 保存所有日志
+void FormTcpServer::saveLog()
+{
 
+}
 
 
 

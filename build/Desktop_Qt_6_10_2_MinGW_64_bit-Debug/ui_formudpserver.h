@@ -27,11 +27,10 @@ class Ui_FormUdpServer
 {
 public:
     QGroupBox *groupBox_2;
-    QPlainTextEdit *plainTextEdit;
+    QPlainTextEdit *plainTextEdit_udpServerSendData;
     QLabel *label_5;
     QPushButton *pushButton_UDPServerClose;
     QPushButton *pushButton_UDPServerSendMsg;
-    QPushButton *pushButton_UDPServerStop;
     QPushButton *pushButton_UDPServerStart;
     QSpinBox *spinBox_UDPServerPort;
     QLabel *label_2;
@@ -48,15 +47,15 @@ public:
         groupBox_2 = new QGroupBox(FormUdpServer);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setGeometry(QRect(690, 0, 201, 551));
-        plainTextEdit = new QPlainTextEdit(groupBox_2);
-        plainTextEdit->setObjectName("plainTextEdit");
-        plainTextEdit->setGeometry(QRect(10, 380, 181, 91));
+        plainTextEdit_udpServerSendData = new QPlainTextEdit(groupBox_2);
+        plainTextEdit_udpServerSendData->setObjectName("plainTextEdit_udpServerSendData");
+        plainTextEdit_udpServerSendData->setGeometry(QRect(10, 380, 181, 91));
         label_5 = new QLabel(groupBox_2);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(10, 350, 151, 31));
         pushButton_UDPServerClose = new QPushButton(groupBox_2);
         pushButton_UDPServerClose->setObjectName("pushButton_UDPServerClose");
-        pushButton_UDPServerClose->setGeometry(QRect(10, 300, 181, 41));
+        pushButton_UDPServerClose->setGeometry(QRect(10, 230, 181, 41));
         QIcon icon;
         icon.addFile(QString::fromUtf8(":/new/prefix1/images/exit.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         pushButton_UDPServerClose->setIcon(icon);
@@ -66,18 +65,12 @@ public:
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/new/prefix1/images/sendmsg.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         pushButton_UDPServerSendMsg->setIcon(icon1);
-        pushButton_UDPServerStop = new QPushButton(groupBox_2);
-        pushButton_UDPServerStop->setObjectName("pushButton_UDPServerStop");
-        pushButton_UDPServerStop->setGeometry(QRect(10, 230, 181, 41));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/new/prefix1/images/stop.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        pushButton_UDPServerStop->setIcon(icon2);
         pushButton_UDPServerStart = new QPushButton(groupBox_2);
         pushButton_UDPServerStart->setObjectName("pushButton_UDPServerStart");
         pushButton_UDPServerStart->setGeometry(QRect(10, 160, 181, 41));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/new/prefix1/images/start.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        pushButton_UDPServerStart->setIcon(icon3);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/new/prefix1/images/start.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        pushButton_UDPServerStart->setIcon(icon2);
         spinBox_UDPServerPort = new QSpinBox(groupBox_2);
         spinBox_UDPServerPort->setObjectName("spinBox_UDPServerPort");
         spinBox_UDPServerPort->setGeometry(QRect(10, 100, 181, 31));
@@ -113,7 +106,6 @@ public:
         label_5->setText(QCoreApplication::translate("FormUdpServer", "\346\265\213\350\257\225\346\266\210\346\201\257\357\274\232", nullptr));
         pushButton_UDPServerClose->setText(QCoreApplication::translate("FormUdpServer", "\351\200\200\345\207\272\347\250\213\345\272\217", nullptr));
         pushButton_UDPServerSendMsg->setText(QCoreApplication::translate("FormUdpServer", "\345\217\221\351\200\201\346\266\210\346\201\257", nullptr));
-        pushButton_UDPServerStop->setText(QCoreApplication::translate("FormUdpServer", "\345\205\263\351\227\255\347\233\221\345\220\254", nullptr));
         pushButton_UDPServerStart->setText(QCoreApplication::translate("FormUdpServer", "\345\220\257\345\212\250\347\233\221\345\220\254", nullptr));
         label_2->setText(QCoreApplication::translate("FormUdpServer", "\346\234\254\345\234\260\344\270\273\346\234\272\347\253\257\345\217\243\357\274\232", nullptr));
         comboBox_UDPServerIP->setItemText(0, QCoreApplication::translate("FormUdpServer", "127.0.0.1", nullptr));
