@@ -71,29 +71,12 @@
      <string>测试消息：</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_UDPClientClose">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>300</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>退出程序</string>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/images/exit.ico</normaloff>:/new/prefix1/images/exit.ico</iconset>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_UDPClientSendMsg">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>10</x>
       <y>490</y>
-      <width>91</width>
+      <width>181</width>
       <height>41</height>
      </rect>
     </property>
@@ -103,40 +86,6 @@
     <property name="icon">
      <iconset resource="images.qrc">
       <normaloff>:/new/prefix1/images/sendmsg.ico</normaloff>:/new/prefix1/images/sendmsg.ico</iconset>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_UDPClientDisconnect">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>断开服务器</string>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/images/disconnect.ico</normaloff>:/new/prefix1/images/disconnect.ico</iconset>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_UDPClientConnect">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>160</y>
-      <width>181</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>连接服务器</string>
-    </property>
-    <property name="icon">
-     <iconset resource="images.qrc">
-      <normaloff>:/new/prefix1/images/connect.ico</normaloff>:/new/prefix1/images/connect.ico</iconset>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_UDPClientPort">
@@ -196,17 +145,21 @@
      <string>远程主机地址：</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="checkBox_UDPClientAtuoTesting">
+   <widget class="QPushButton" name="pushButton_UDPClientClose">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>490</y>
-      <width>81</width>
+      <y>160</y>
+      <width>181</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>自动化测试</string>
+     <string>退出程序</string>
+    </property>
+    <property name="icon">
+     <iconset resource="images.qrc">
+      <normaloff>:/new/prefix1/images/exit.ico</normaloff>:/new/prefix1/images/exit.ico</iconset>
     </property>
    </widget>
   </widget>

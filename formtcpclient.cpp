@@ -8,7 +8,8 @@ FormTcpClient::FormTcpClient(QWidget *parent)
 {
     ui->setupUi(this);
     // 设置ip下拉框为可编辑，允许手动输入ip
-    ui->comboBox_TCPClientIP->setEditable(false);
+    ui->comboBox_TCPClientIP->setEditable(true);
+    ui->comboBox_TCPClientIP->setEnabled(true);
 
     ui->pushButton_TCPClientDisconnect->setEnabled(false);
     ui->pushButton_TCPClientSendMsg->setEnabled(false);
@@ -385,7 +386,7 @@ void FormTcpClient::trimLog(int keepBlocks, int trimStep)
     static const int kKeepDefault = 1000;       //默认保留数
     static const int kTrimDefault = 200;        // 默认删除步长
     const int targetKeep = keepBlocks > 0 ? keepBlocks : kKeepDefault;  // 获取实际bolck数
-    const int step = trimStep ? trimStep > 0 : kTrimDefault;    // 获取实际步长
+    const int step = trimStep > 0 ? trimStep : kTrimDefault;    // 获取实际步长
 
     auto doc = ui->plainTextEdit_TCPClientMsg->document();   //获取文档对象
     int currentblockCount = doc->blockCount(); // 当前block数

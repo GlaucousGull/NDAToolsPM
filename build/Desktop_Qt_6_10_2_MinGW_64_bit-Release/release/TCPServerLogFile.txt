@@ -1,0 +1,7 @@
+[Server started successfullly]
+[Prompt:New client connection.]
+[26/03/12 16:54:29] Received:hello TCP server
+[Prompt:Client disconnected.]
+[Prompt:Disconnect to client connections.]
+[Server started successfullly]
+[Prompt:New client connection.]

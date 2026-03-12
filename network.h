@@ -78,7 +78,7 @@ signals:    // Qt信号区域
     // 连接失败信号：当TCP连接失败时发出，携带错误信息
     void connectionFailed(const QString& errorString);
 
-    // 数据接送路型号：当从服务器接收到数据时发出，携带接收到的数据内容
+    // 数据接送信号：当从服务器接收到数据时发出，携带接收到的数据内容
     void dataReceived(const QString& data);
 
 public Q_SLOTS: // 公共槽函数区域

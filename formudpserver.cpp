@@ -271,7 +271,7 @@ qDebug() << "FormUdpServer::on_pushButton_UDPServerStart_clicked 函数调用";
         if(udpServerSocket->bind(hostAddress, port)) {
             ui->pushButton_UDPServerStart->setText("关闭监听");
             udpServerAppendStrItem(1, "UDP服务器启动监听成功", false);
-            serverRunning = false;
+            serverRunning = true;
             QSettings settings;
             settings.setValue("UDPServer/lastIp", hostAddress.toString());
             settings.setValue("UDPServer/lastPort", static_cast<int>(port));
@@ -324,61 +324,59 @@ void FormUdpServer::on_pushButton_UDPServerClose_clicked()
  */
 void FormUdpServer::on_pushButton_UDPServerSendMsg_clicked()
 {
-    // 验证UDP套接字是否已初始化
+    // 1. 验证UDP套接字是否已初始化
     if(!udpServerSocket) {
         HANDLE_ERROR(ErrorHandler::ValidationError, ErrorHandler::Warning, "UDP套接字未初始化，无法发送数据。", this);
         return;
     }
 
-    // 验证服务器是否正在运行
-    if(!udpServerSocket) {
+    // 2. 验证服务器是否正在运行（修复：原代码重复校验udpServerSocket，改为校验serverRunning）
+    if(!serverRunning) {
         HANDLE_ERROR(ErrorHandler::ValidationError, ErrorHandler::Warning, "请先启动服务器，监听后才可发送消息", this);
         return;
     }
 
-    // 验证是否有客户端地址信息
-    if(!m_lastClientAddress .isNull() || m_lastClientPort == 0) {
+    // 3. 验证是否有客户端地址信息（核心修复：逻辑写反问题）
+    if(m_lastClientAddress.isNull() || m_lastClientPort == 0) {
         HANDLE_ERROR(ErrorHandler::ValidationError, ErrorHandler::Warning, "当前没有收到任何客户端消息，无法确定发送地址", this);
         return;
     }
 
-    // 验证输入框控件是否存在
-    if(ui->plainTextEdit_udpServerSendData) {
+    // 4. 验证输入框控件是否存在（核心修复：逻辑写反）
+    if(!ui->plainTextEdit_udpServerSendData) {
+        HANDLE_ERROR(ErrorHandler::ValidationError, ErrorHandler::Warning, "发送输入框未初始化", this);
         return;
     }
 
+    // 5. 获取并验证消息内容
     QString message = ui->plainTextEdit_udpServerSendData->toPlainText().trimmed();
-
     if(message.isEmpty()) {
-        QMessageBox::warning(this, "提示", "发送小心内容不能为空！");
+        QMessageBox::warning(this, "提示", "发送内容不能为空！");
         ui->plainTextEdit_udpServerSendData->setFocus();
         return;
     }
 
+    // 6. 编码并发送数据
     QByteArray data = message.toUtf8();
-
-    // 发送数据报到客户端
     qint64 bytes = udpServerSocket->writeDatagram(data, m_lastClientAddress, m_lastClientPort);
-
     if(bytes < 0) {
         QMessageBox::warning(this, "错误", QString("发送失败：%1").arg(udpServerSocket->errorString()));
         return;
     }
 
-    // 记录发送日志
+    // 7. 记录发送日志（修复格式错误）
     QString timeStamp = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-
-    // 构建日志条目
-    QString logEntry = QString("\n[%1] 服务器发送到 %2:%3\%4\n")
-                           .arg(timeStamp, m_lastClientAddress.toString())
+    QString logEntry = QString("\n[%1] 服务器发送到 %2:%3\n%4\n")
+                           .arg(timeStamp)
+                           .arg(m_lastClientAddress.toString())
                            .arg(m_lastClientPort)
                            .arg(message);
 
-    // 添加日志项到列表
+    // 8. 添加日志并滚动到底部
     ui->listWidget_UDPServerListMsg->addItem(logEntry);
-
-    // 自动滚动到底部
     ui->listWidget_UDPServerListMsg->scrollToBottom();
+
+    qDebug() << "UDP服务器主动发送成功：" << bytes << "字节，客户端：" << m_lastClientAddress << ":" << m_lastClientPort;
 }
 
 // 读取并处理收到的数据报：当UDP套接字有数据可读时自动调用
@@ -387,7 +385,6 @@ void FormUdpServer::udpServerREadPendingEDatagrams()
     if(!serverRunning) {
         return;
     }
-
     if(!udpServerSocket) {
         qWarning() << "FormUDPServer::udpServerREadPendingEDatagrams: udpServerSocket is null";
         return;
@@ -411,13 +408,21 @@ void FormUdpServer::udpServerREadPendingEDatagrams()
             continue;
         }
 
+        // 保存客户端地址（关键：确保后续发送能拿到地址）
         m_lastClientAddress = clientAddress;
         m_lastClientPort = clientPort;
 
+        // 记录接收日志
         udpServerAppendStrItem(0, QString::fromUtf8(datagram), false);
 
-        QByteArray response = QString("[Server reply:%1").arg(QString::fromUtf8(datagram)).toUtf8();
-        udpServerSocket->writeDatagram(response, clientAddress, clientPort);
+        // ===== 修复回发逻辑：补全括号 + 检查发送结果 =====
+        QByteArray response = QString("[Server reply:%1]").arg(QString::fromUtf8(datagram)).toUtf8();
+        qint64 sendBytes = udpServerSocket->writeDatagram(response, clientAddress, clientPort);
+        if(sendBytes < 0) {
+            qWarning() << "UDP回发数据失败：" << udpServerSocket->errorString();
+        } else {
+            qDebug() << "UDP回发成功：" << sendBytes << "字节，客户端：" << clientAddress << ":" << clientPort;
+        }
     }
 }
 

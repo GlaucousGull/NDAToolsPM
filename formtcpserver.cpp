@@ -10,6 +10,8 @@ FormTcpServer::FormTcpServer(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->comboBox_TCPServerIP->setEnabled(true);
+
     tcpServer = new QTcpServer(this); // 服务器实例，RAII绑定到父对象上，父对象可以手动控制服务器实例的销毁和自动销毁
 
     // 监听新连接信号
@@ -147,42 +149,42 @@ FormTcpServer::FormTcpServer(QWidget *parent)
         "   border-radius: 4px;"
         "   padding: 4px 8px; /* 内边距 */"
         "   min-width: 120px; /* 最小宽度 */"
-        "}"
-        "QComboBox::drop-down {"
-        "   border: none; /* 下拉箭头边框隐藏 */"
-        "}"
-        "QComboBox::down-arrow {"
-        "   image: url(:/icons/arrow_down.png); /* 可选：替换下拉箭头图标，注释掉则用默认 */"
-        "   width: 8px;"
-        "   height: 8px;"
-        "}"
-        "QComboBox QAbstractItemView {"
-        "   background-color: #FFFFFF;"
-        "   border: 1px solid #D1D5DB;"
-        "   selection-background-color: #3B82F6;"
-        "}"
+            "}"
+            "QComboBox::drop-down {"
+            "   border: none; /* 下拉箭头边框隐藏 */"
+            "}"
+            "QComboBox::down-arrow {"
+            "   image: url(:/icons/arrow_down.png); /* 可选：替换下拉箭头图标，注释掉则用默认 */"
+            "   width: 8px;"
+            "   height: 8px;"
+            "}"
+            "QComboBox QAbstractItemView {"
+            "   background-color: #FFFFFF;"
+            "   border: 1px solid #D1D5DB;"
+            "   selection-background-color: #3B82F6;"
+            "}"
 
-        // 数字输入框（SpinBox，端口选择区）
-        "QSpinBox {"
-        "   background-color: #FFFFFF;"
-        "   border: 1px solid #D1D5DB;"
-        "   border-radius: 4px;"
-        "   padding: 4px 8px;"
-        "   min-width: 80px;"
-        "}"
-        "QSpinBox::up-button, QSpinBox::down-button {"
-        "   border: none; /* 上下箭头边框隐藏 */"
-        "   background-color: #F3F4F6;"
-        "}"
+            // 数字输入框（SpinBox，端口选择区）
+            "QSpinBox {"
+            "   background-color: #FFFFFF;"
+            "   border: 1px solid #D1D5DB;"
+            "   border-radius: 4px;"
+            "   padding: 4px 8px;"
+            "   min-width: 80px;"
+            "}"
+            "QSpinBox::up-button, QSpinBox::down-button {"
+            "   border: none; /* 上下箭头边框隐藏 */"
+            "   background-color: #F3F4F6;"
+            "}"
 
-        // 文本框（可选：若有日志输入/显示文本框）
-        "QTextEdit {"
-        "   background-color: #FFFFFF;"
-        "   border: 1px solid #D1D5DB;"
-        "   border-radius: 4px;"
-        "   padding: 6px;"
-        "}"
-    );
+            // 文本框（可选：若有日志输入/显示文本框）
+            "QTextEdit {"
+            "   background-color: #FFFFFF;"
+            "   border: 1px solid #D1D5DB;"
+            "   border-radius: 4px;"
+            "   padding: 6px;"
+            "}"
+        );
 }
 
 
